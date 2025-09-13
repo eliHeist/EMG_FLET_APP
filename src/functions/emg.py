@@ -1,5 +1,5 @@
 import requests, random
-from settings import DEBUG, DATA_ENDPOINT
+from settings import DEBUG, DATA_ENDPOINT, TESTING_ENDPOINT, toggleDebug
 
 
 async def fetch_emg_value():
@@ -14,8 +14,8 @@ async def fetch_emg_value():
 
 async def test_connection():
     try:
-        response = requests.get(DATA_ENDPOINT, timeout=5)
+        response = requests.get(TESTING_ENDPOINT, timeout=5)
         response.raise_for_status()
-        return True
+        return toggleDebug(True)
     except Exception:
-        return False
+        return toggleDebug(False)
